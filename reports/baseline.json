@@ -1,0 +1,565 @@
+{
+  "schema_version": "1.0",
+  "backend": {
+    "keyword": "bm25",
+    "vector": "tfidf",
+    "graph": "in_memory_explicit_relations",
+    "fusion": "rrf_k60"
+  },
+  "top_k": 5,
+  "metrics": {
+    "query_count": 30,
+    "recall_at_5": 1.0,
+    "mrr": 0.9111,
+    "top1_citation_accuracy": 0.8333,
+    "route_accuracy": 1.0,
+    "mean_latency_ms": 0.63
+  },
+  "cases": [
+    {
+      "id": "q01",
+      "query": "RAG 的离线入库和在线问答分别做什么？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/10_security_updates.md",
+        "data/corpus/04_vector_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 1.21
+    },
+    {
+      "id": "q02",
+      "query": "为什么 RAG 仍然可能给出错误答案？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/07_query_router.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.668
+    },
+    {
+      "id": "q03",
+      "query": "怎样区分检索错误和生成错误？",
+      "expected_route": "hybrid",
+      "actual_route": "hybrid",
+      "sources": [
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/03_bm25.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.597
+    },
+    {
+      "id": "q04",
+      "query": "Chunk 太大和太小各有什么风险？",
+      "expected_route": "hybrid",
+      "actual_route": "hybrid",
+      "sources": [
+        "data/corpus/02_chunking.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/08_evaluation.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.545
+    },
+    {
+      "id": "q05",
+      "query": "Overlap 的作用是什么？",
+      "expected_route": "vector",
+      "actual_route": "vector",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/02_chunking.md",
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/09_api_reliability.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "top1_citation_correct": false,
+      "latency_ms": 0.376
+    },
+    {
+      "id": "q06",
+      "query": "chunk_id 和 document_id 为什么要稳定？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/10_security_updates.md",
+        "data/corpus/02_chunking.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/09_api_reliability.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "top1_citation_correct": false,
+      "latency_ms": 0.506
+    },
+    {
+      "id": "q07",
+      "query": "BM25 的 k1 与 b 控制什么？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/03_bm25.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/10_security_updates.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.606
+    },
+    {
+      "id": "q08",
+      "query": "为什么 trace_id 适合关键词检索？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/03_bm25.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/10_security_updates.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/04_vector_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.495
+    },
+    {
+      "id": "q09",
+      "query": "ERR-1042 和 /health 应优先用哪种检索？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/03_bm25.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/10_security_updates.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.433
+    },
+    {
+      "id": "q10",
+      "query": "Embedding 的含义和用途是什么？",
+      "expected_route": "vector",
+      "actual_route": "vector",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/04_vector_retrieval.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/09_api_reliability.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "top1_citation_correct": false,
+      "latency_ms": 0.452
+    },
+    {
+      "id": "q11",
+      "query": "余弦相似度和内积有什么区别？",
+      "expected_route": "vector",
+      "actual_route": "vector",
+      "sources": [
+        "data/corpus/04_vector_retrieval.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/08_evaluation.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.483
+    },
+    {
+      "id": "q12",
+      "query": "v0.1.0 为什么不能把 TF-IDF 结果写成 BGE 指标？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/04_vector_retrieval.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/08_evaluation.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.558
+    },
+    {
+      "id": "q13",
+      "query": "RRF 的计算公式是什么？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/10_security_updates.md",
+        "data/corpus/03_bm25.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.604
+    },
+    {
+      "id": "q14",
+      "query": "为什么不同检索器的原始分数不能直接相加？",
+      "expected_route": "vector",
+      "actual_route": "vector",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/04_vector_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.664
+    },
+    {
+      "id": "q15",
+      "query": "融合常数 k 变大后名次差异如何变化？",
+      "expected_route": "hybrid",
+      "actual_route": "hybrid",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/04_vector_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.523
+    },
+    {
+      "id": "q16",
+      "query": "图检索适合回答什么关系问题？",
+      "expected_route": "graph",
+      "actual_route": "graph",
+      "sources": [
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/04_vector_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.488
+    },
+    {
+      "id": "q17",
+      "query": "RRF 与 BM25 的关联路径是什么？",
+      "expected_route": "graph",
+      "actual_route": "graph",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/03_bm25.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.798
+    },
+    {
+      "id": "q18",
+      "query": "Query Router 到 Graph Retrieval 的多跳路径是什么？",
+      "expected_route": "graph",
+      "actual_route": "graph",
+      "sources": [
+        "data/corpus/07_query_router.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/05_rrf_fusion.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.756
+    },
+    {
+      "id": "q19",
+      "query": "Query Router 如何选择四种检索路线？",
+      "expected_route": "hybrid",
+      "actual_route": "hybrid",
+      "sources": [
+        "data/corpus/07_query_router.md",
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/09_api_reliability.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.706
+    },
+    {
+      "id": "q20",
+      "query": "expected_route 用于计算什么？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/08_evaluation.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/09_api_reliability.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "top1_citation_correct": false,
+      "latency_ms": 0.375
+    },
+    {
+      "id": "q21",
+      "query": "关系实体未命中时路由怎样降级？",
+      "expected_route": "graph",
+      "actual_route": "graph",
+      "sources": [
+        "data/corpus/07_query_router.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/08_evaluation.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.476
+    },
+    {
+      "id": "q22",
+      "query": "Recall@K 回答了哪个评测问题？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/08_evaluation.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/02_chunking.md",
+        "data/corpus/04_vector_retrieval.md",
+        "data/corpus/06_graph_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 1.155
+    },
+    {
+      "id": "q23",
+      "query": "MRR 如何反映首个相关结果的位置？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/08_evaluation.md",
+        "data/corpus/04_vector_retrieval.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/02_chunking.md",
+        "data/corpus/01_rag_basics.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.788
+    },
+    {
+      "id": "q24",
+      "query": "为什么合成评测集不能冒充行业基准？",
+      "expected_route": "vector",
+      "actual_route": "vector",
+      "sources": [
+        "data/corpus/08_evaluation.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/02_chunking.md",
+        "data/corpus/04_vector_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.672
+    },
+    {
+      "id": "q25",
+      "query": "/health 与 /debug/retrieval 的职责有什么不同？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/04_vector_retrieval.md",
+        "data/corpus/01_rag_basics.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "top1_citation_correct": false,
+      "latency_ms": 0.482
+    },
+    {
+      "id": "q26",
+      "query": "API 响应为什么要返回 trace_id？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/08_evaluation.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.492
+    },
+    {
+      "id": "q27",
+      "query": "LLM 不可用时系统如何降级？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/10_security_updates.md",
+        "data/corpus/01_rag_basics.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.318
+    },
+    {
+      "id": "q28",
+      "query": "API Key 误入公开历史后应该怎么处理？",
+      "expected_route": "keyword",
+      "actual_route": "keyword",
+      "sources": [
+        "data/corpus/10_security_updates.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/09_api_reliability.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/02_chunking.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.425
+    },
+    {
+      "id": "q29",
+      "query": "重复入库会造成什么问题？",
+      "expected_route": "hybrid",
+      "actual_route": "hybrid",
+      "sources": [
+        "data/corpus/10_security_updates.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/07_query_router.md",
+        "data/corpus/01_rag_basics.md",
+        "data/corpus/06_graph_retrieval.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 1.492
+    },
+    {
+      "id": "q30",
+      "query": "Prompt Injection 文档为什么不能当作系统指令？",
+      "expected_route": "vector",
+      "actual_route": "vector",
+      "sources": [
+        "data/corpus/10_security_updates.md",
+        "data/corpus/05_rrf_fusion.md",
+        "data/corpus/06_graph_retrieval.md",
+        "data/corpus/03_bm25.md",
+        "data/corpus/08_evaluation.md"
+      ],
+      "hit": true,
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "top1_citation_correct": true,
+      "latency_ms": 0.748
+    }
+  ],
+  "limitations": [
+    "The corpus and labels are synthetic demonstration data.",
+    "TF-IDF is the verified offline vector baseline; BGE is not claimed in this report.",
+    "Latency is a local single-process measurement, not a load test."
+  ]
+}

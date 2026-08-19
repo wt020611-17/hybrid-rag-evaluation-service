@@ -1,0 +1,30 @@
+{"id":"q01","query":"RAG 的离线入库和在线问答分别做什么？","relevant_sources":["data/corpus/01_rag_basics.md"],"expected_route":"keyword"}
+{"id":"q02","query":"为什么 RAG 仍然可能给出错误答案？","relevant_sources":["data/corpus/01_rag_basics.md"],"expected_route":"keyword"}
+{"id":"q03","query":"怎样区分检索错误和生成错误？","relevant_sources":["data/corpus/01_rag_basics.md","data/corpus/08_evaluation.md"],"expected_route":"hybrid"}
+{"id":"q04","query":"Chunk 太大和太小各有什么风险？","relevant_sources":["data/corpus/02_chunking.md"],"expected_route":"hybrid"}
+{"id":"q05","query":"Overlap 的作用是什么？","relevant_sources":["data/corpus/02_chunking.md"],"expected_route":"vector"}
+{"id":"q06","query":"chunk_id 和 document_id 为什么要稳定？","relevant_sources":["data/corpus/02_chunking.md","data/corpus/10_security_updates.md"],"expected_route":"keyword"}
+{"id":"q07","query":"BM25 的 k1 与 b 控制什么？","relevant_sources":["data/corpus/03_bm25.md"],"expected_route":"keyword"}
+{"id":"q08","query":"为什么 trace_id 适合关键词检索？","relevant_sources":["data/corpus/03_bm25.md","data/corpus/09_api_reliability.md"],"expected_route":"keyword"}
+{"id":"q09","query":"ERR-1042 和 /health 应优先用哪种检索？","relevant_sources":["data/corpus/03_bm25.md"],"expected_route":"keyword"}
+{"id":"q10","query":"Embedding 的含义和用途是什么？","relevant_sources":["data/corpus/04_vector_retrieval.md"],"expected_route":"vector"}
+{"id":"q11","query":"余弦相似度和内积有什么区别？","relevant_sources":["data/corpus/04_vector_retrieval.md"],"expected_route":"vector"}
+{"id":"q12","query":"v0.1.0 为什么不能把 TF-IDF 结果写成 BGE 指标？","relevant_sources":["data/corpus/04_vector_retrieval.md"],"expected_route":"keyword"}
+{"id":"q13","query":"RRF 的计算公式是什么？","relevant_sources":["data/corpus/05_rrf_fusion.md"],"expected_route":"keyword"}
+{"id":"q14","query":"为什么不同检索器的原始分数不能直接相加？","relevant_sources":["data/corpus/05_rrf_fusion.md"],"expected_route":"vector"}
+{"id":"q15","query":"融合常数 k 变大后名次差异如何变化？","relevant_sources":["data/corpus/05_rrf_fusion.md"],"expected_route":"hybrid"}
+{"id":"q16","query":"图检索适合回答什么关系问题？","relevant_sources":["data/corpus/06_graph_retrieval.md"],"expected_route":"graph"}
+{"id":"q17","query":"RRF 与 BM25 的关联路径是什么？","relevant_sources":["data/corpus/05_rrf_fusion.md"],"expected_route":"graph"}
+{"id":"q18","query":"Query Router 到 Graph Retrieval 的多跳路径是什么？","relevant_sources":["data/corpus/07_query_router.md"],"expected_route":"graph"}
+{"id":"q19","query":"Query Router 如何选择四种检索路线？","relevant_sources":["data/corpus/07_query_router.md"],"expected_route":"hybrid"}
+{"id":"q20","query":"expected_route 用于计算什么？","relevant_sources":["data/corpus/07_query_router.md"],"expected_route":"keyword"}
+{"id":"q21","query":"关系实体未命中时路由怎样降级？","relevant_sources":["data/corpus/07_query_router.md"],"expected_route":"graph"}
+{"id":"q22","query":"Recall@K 回答了哪个评测问题？","relevant_sources":["data/corpus/08_evaluation.md"],"expected_route":"keyword"}
+{"id":"q23","query":"MRR 如何反映首个相关结果的位置？","relevant_sources":["data/corpus/08_evaluation.md"],"expected_route":"keyword"}
+{"id":"q24","query":"为什么合成评测集不能冒充行业基准？","relevant_sources":["data/corpus/08_evaluation.md"],"expected_route":"vector"}
+{"id":"q25","query":"/health 与 /debug/retrieval 的职责有什么不同？","relevant_sources":["data/corpus/09_api_reliability.md"],"expected_route":"keyword"}
+{"id":"q26","query":"API 响应为什么要返回 trace_id？","relevant_sources":["data/corpus/09_api_reliability.md"],"expected_route":"keyword"}
+{"id":"q27","query":"LLM 不可用时系统如何降级？","relevant_sources":["data/corpus/07_query_router.md","data/corpus/09_api_reliability.md"],"expected_route":"keyword"}
+{"id":"q28","query":"API Key 误入公开历史后应该怎么处理？","relevant_sources":["data/corpus/10_security_updates.md"],"expected_route":"keyword"}
+{"id":"q29","query":"重复入库会造成什么问题？","relevant_sources":["data/corpus/10_security_updates.md"],"expected_route":"hybrid"}
+{"id":"q30","query":"Prompt Injection 文档为什么不能当作系统指令？","relevant_sources":["data/corpus/10_security_updates.md"],"expected_route":"vector"}

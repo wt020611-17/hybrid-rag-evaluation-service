@@ -1,0 +1,19 @@
+{
+  "edges": [
+    {"source": "RAG", "relation": "包含", "target": "Retriever", "source_document": "data/corpus/01_rag_basics.md"},
+    {"source": "Retriever", "relation": "包含", "target": "BM25", "source_document": "data/corpus/03_bm25.md"},
+    {"source": "Retriever", "relation": "包含", "target": "Vector Retrieval", "source_document": "data/corpus/04_vector_retrieval.md"},
+    {"source": "Retriever", "relation": "包含", "target": "Graph Retrieval", "source_document": "data/corpus/06_graph_retrieval.md"},
+    {"source": "RRF", "relation": "融合", "target": "BM25", "source_document": "data/corpus/05_rrf_fusion.md"},
+    {"source": "RRF", "relation": "融合", "target": "Vector Retrieval", "source_document": "data/corpus/05_rrf_fusion.md"},
+    {"source": "RRF", "relation": "融合", "target": "Graph Retrieval", "source_document": "data/corpus/05_rrf_fusion.md"},
+    {"source": "Query Router", "relation": "路由到", "target": "BM25", "source_document": "data/corpus/07_query_router.md"},
+    {"source": "Query Router", "relation": "路由到", "target": "Vector Retrieval", "source_document": "data/corpus/07_query_router.md"},
+    {"source": "Query Router", "relation": "路由到", "target": "Graph Retrieval", "source_document": "data/corpus/07_query_router.md"},
+    {"source": "Chunk", "relation": "保留", "target": "Citation", "source_document": "data/corpus/02_chunking.md"},
+    {"source": "Citation", "relation": "用于计算", "target": "Citation Accuracy", "source_document": "data/corpus/08_evaluation.md"},
+    {"source": "Trace ID", "relation": "关联", "target": "API Request", "source_document": "data/corpus/09_api_reliability.md"},
+    {"source": "Embedding Version", "relation": "属于", "target": "Index Version", "source_document": "data/corpus/10_security_updates.md"}
+  ]
+}
+
