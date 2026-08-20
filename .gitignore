@@ -12,4 +12,10 @@ build/
 .idea/
 .vscode/
 reports/*.tmp
+.secrets/
+volumes/
+models/
+.hf-cache/
+*.local.json
+reports/runtime-*.json
 

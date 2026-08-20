@@ -1,0 +1,5122 @@
+{
+  "schema_version": "1.0",
+  "dataset": "curated public primary-source summaries",
+  "query_count": 60,
+  "top_k": 5,
+  "backends": {
+    "keyword": "BM25",
+    "dense": "BAAI/bge-small-zh-v1.5 + Milvus HNSW/COSINE",
+    "graph": "Neo4j explicit 1-2 hop paths",
+    "fusion": "RRF k=60"
+  },
+  "strategies": {
+    "bm25": {
+      "metrics": {
+        "query_count": 60,
+        "recall_at_5": 0.95,
+        "mrr": 0.8292,
+        "top1_citation_accuracy": 0.75,
+        "route_accuracy": null,
+        "mean_latency_ms": 319.217,
+        "p50_latency_ms": 386.188,
+        "p95_latency_ms": 411.107
+      },
+      "failures": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 383.945
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 411.107
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 212.479
+        }
+      ],
+      "cases": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 383.945
+        },
+        {
+          "id": "q002",
+          "query": "为什么检索评测不能只看成功案例？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 381.248
+        },
+        {
+          "id": "q003",
+          "query": "MRR 和首个相关结果排名有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.516
+        },
+        {
+          "id": "q004",
+          "query": "离线检索报告应该保存哪些内容",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 389.423
+        },
+        {
+          "id": "q005",
+          "query": "BM25 的 k1 和 b 分别控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 407.731
+        },
+        {
+          "id": "q006",
+          "query": "为什么关键词检索适合错误码？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 398.667
+        },
+        {
+          "id": "q007",
+          "query": "BM25 与稠密检索有什么互补关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.962
+        },
+        {
+          "id": "q008",
+          "query": "说明词频饱和与文档长度归一化",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 189.458
+        },
+        {
+          "id": "q009",
+          "query": "RRF 的 1/(k+rank) 公式是什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 413.837
+        },
+        {
+          "id": "q010",
+          "query": "为什么 RRF 不需要校准不同分数？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 394.431
+        },
+        {
+          "id": "q011",
+          "query": "BM25 和 BGE 通过什么关系合并排名？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 400.783
+        },
+        {
+          "id": "q012",
+          "query": "多路检索排名融合的常用常数",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 397.68
+        },
+        {
+          "id": "q013",
+          "query": "bge-small-zh-v1.5 的向量维度是多少？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 406.099
+        },
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 385.456
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 411.107
+        },
+        {
+          "id": "q016",
+          "query": "中文嵌入模型的参数量、长度和许可证",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 189.508
+        },
+        {
+          "id": "q017",
+          "query": "Milvus collection 的主键字段是什么？",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 207.459
+        },
+        {
+          "id": "q018",
+          "query": "为什么关闭 dynamic field？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 391.651
+        },
+        {
+          "id": "q019",
+          "query": "source 字段和删除文档有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.823
+        },
+        {
+          "id": "q020",
+          "query": "向量集合需要保存哪些标量元数据",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.734
+        },
+        {
+          "id": "q021",
+          "query": "HNSW 的 M=16 与 efConstruction=128 表示什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 417.182
+        },
+        {
+          "id": "q022",
+          "query": "为什么提高 ef 会增加查询延迟？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 382.255
+        },
+        {
+          "id": "q023",
+          "query": "HNSW 参数和召回延迟有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 407.237
+        },
+        {
+          "id": "q024",
+          "query": "近似最近邻索引如何做参数对比",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.806
+        },
+        {
+          "id": "q025",
+          "query": "Milvus standalone 使用哪个端口？",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 208.558
+        },
+        {
+          "id": "q026",
+          "query": "为什么向量数据库需要 etcd 和 MinIO？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 403.308
+        },
+        {
+          "id": "q027",
+          "query": "Milvus、etcd、MinIO 的依赖关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 400.147
+        },
+        {
+          "id": "q028",
+          "query": "独立命名卷如何避免实例冲突",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 189.2
+        },
+        {
+          "id": "q029",
+          "query": "NEO4J_AUTH 如何配置账号密码？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 214.207
+        },
+        {
+          "id": "q030",
+          "query": "为什么图节点要带 namespace？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 186.351
+        },
+        {
+          "id": "q031",
+          "query": "Neo4j 数据卷与日志卷是什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 406.615
+        },
+        {
+          "id": "q032",
+          "query": "图数据库容器的数据隔离方案",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 197.763
+        },
+        {
+          "id": "q033",
+          "query": "RELATED*1..2 表达什么路径？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 394.186
+        },
+        {
+          "id": "q034",
+          "query": "为什么 Cypher 查询要限制最大深度？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.049
+        },
+        {
+          "id": "q035",
+          "query": "实体别名与一至二跳检索的关系",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.417
+        },
+        {
+          "id": "q036",
+          "query": "如何避免把用户文本拼进图查询",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.911
+        },
+        {
+          "id": "q037",
+          "query": "POST /query 的 top_k 范围是多少？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.645
+        },
+        {
+          "id": "q038",
+          "query": "为什么请求体要用 Pydantic 校验？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.722
+        },
+        {
+          "id": "q039",
+          "query": "trace_id 与引用复盘有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 214.638
+        },
+        {
+          "id": "q040",
+          "query": "健康接口应检查哪些真实后端",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 188.297
+        },
+        {
+          "id": "q041",
+          "query": "service_completed_successfully 控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 398.0
+        },
+        {
+          "id": "q042",
+          "query": "为什么 API 要等待 indexer 成功？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 209.894
+        },
+        {
+          "id": "q043",
+          "query": "Docker Compose 与 Indexer 的编排关系",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/08_neo4j_docker.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 407.51
+        },
+        {
+          "id": "q044",
+          "query": "容器健康之后还需要哪些业务验收",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 384.916
+        },
+        {
+          "id": "q045",
+          "query": "OWASP 的 Prompt Injection 风险是什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 430.661
+        },
+        {
+          "id": "q046",
+          "query": "为什么知识库文档仍是不可信输入？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 369.029
+        },
+        {
+          "id": "q047",
+          "query": "引用与间接提示注入有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 407.979
+        },
+        {
+          "id": "q048",
+          "query": "列出降低检索增强生成注入风险的方法",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 390.072
+        },
+        {
+          "id": "q049",
+          "query": "SHA-1 如何用于 chunk_id？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 213.738
+        },
+        {
+          "id": "q050",
+          "query": "为什么文档切分需要重叠窗口？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 386.188
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 212.479
+        },
+        {
+          "id": "q052",
+          "query": "稳定切片标识如何支持重复索引",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 189.621
+        },
+        {
+          "id": "q053",
+          "query": "Router 如何识别 API 名和错误码？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 213.079
+        },
+        {
+          "id": "q054",
+          "query": "为什么概念问题偏向向量模型？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 191.754
+        },
+        {
+          "id": "q055",
+          "query": "查询路由与 Neo4j 多跳路径的关系",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 203.733
+        },
+        {
+          "id": "q056",
+          "query": "可解释规则路由有哪些优缺点",
+          "expected_route": "hybrid",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 388.55
+        },
+        {
+          "id": "q057",
+          "query": "trace_id、chunk_id 和 rank 用来做什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 206.907
+        },
+        {
+          "id": "q058",
+          "query": "为什么引用不是响应里的装饰？",
+          "expected_route": "vector",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.237
+        },
+        {
+          "id": "q059",
+          "query": "Citation 与 Evaluation 的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 208.295
+        },
+        {
+          "id": "q060",
+          "query": "如何区分单机延迟基线和生产 SLA",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 186.39
+        }
+      ]
+    },
+    "bge": {
+      "metrics": {
+        "query_count": 60,
+        "recall_at_5": 0.9,
+        "mrr": 0.7575,
+        "top1_citation_accuracy": 0.6667,
+        "route_accuracy": null,
+        "mean_latency_ms": 303.239,
+        "p50_latency_ms": 389.527,
+        "p95_latency_ms": 407.562
+      },
+      "failures": [
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 392.448
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 409.928
+        },
+        {
+          "id": "q043",
+          "query": "Docker Compose 与 Indexer 的编排关系",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 402.944
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 407.562
+        },
+        {
+          "id": "q053",
+          "query": "Router 如何识别 API 名和错误码？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 404.455
+        },
+        {
+          "id": "q059",
+          "query": "Citation 与 Evaluation 的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 414.904
+        }
+      ],
+      "cases": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 407.38
+        },
+        {
+          "id": "q002",
+          "query": "为什么检索评测不能只看成功案例？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.284
+        },
+        {
+          "id": "q003",
+          "query": "MRR 和首个相关结果排名有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 398.013
+        },
+        {
+          "id": "q004",
+          "query": "离线检索报告应该保存哪些内容",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 190.897
+        },
+        {
+          "id": "q005",
+          "query": "BM25 的 k1 和 b 分别控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 407.205
+        },
+        {
+          "id": "q006",
+          "query": "为什么关键词检索适合错误码？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 201.677
+        },
+        {
+          "id": "q007",
+          "query": "BM25 与稠密检索有什么互补关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.511
+        },
+        {
+          "id": "q008",
+          "query": "说明词频饱和与文档长度归一化",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 389.527
+        },
+        {
+          "id": "q009",
+          "query": "RRF 的 1/(k+rank) 公式是什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 208.784
+        },
+        {
+          "id": "q010",
+          "query": "为什么 RRF 不需要校准不同分数？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.03
+        },
+        {
+          "id": "q011",
+          "query": "BM25 和 BGE 通过什么关系合并排名？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.345
+        },
+        {
+          "id": "q012",
+          "query": "多路检索排名融合的常用常数",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 198.742
+        },
+        {
+          "id": "q013",
+          "query": "bge-small-zh-v1.5 的向量维度是多少？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.533
+        },
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 392.448
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 409.928
+        },
+        {
+          "id": "q016",
+          "query": "中文嵌入模型的参数量、长度和许可证",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 190.648
+        },
+        {
+          "id": "q017",
+          "query": "Milvus collection 的主键字段是什么？",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.711
+        },
+        {
+          "id": "q018",
+          "query": "为什么关闭 dynamic field？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 394.24
+        },
+        {
+          "id": "q019",
+          "query": "source 字段和删除文档有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.805
+        },
+        {
+          "id": "q020",
+          "query": "向量集合需要保存哪些标量元数据",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.587
+        },
+        {
+          "id": "q021",
+          "query": "HNSW 的 M=16 与 efConstruction=128 表示什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 406.851
+        },
+        {
+          "id": "q022",
+          "query": "为什么提高 ef 会增加查询延迟？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.633
+        },
+        {
+          "id": "q023",
+          "query": "HNSW 参数和召回延迟有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 405.698
+        },
+        {
+          "id": "q024",
+          "query": "近似最近邻索引如何做参数对比",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 394.266
+        },
+        {
+          "id": "q025",
+          "query": "Milvus standalone 使用哪个端口？",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 207.768
+        },
+        {
+          "id": "q026",
+          "query": "为什么向量数据库需要 etcd 和 MinIO？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 216.645
+        },
+        {
+          "id": "q027",
+          "query": "Milvus、etcd、MinIO 的依赖关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 386.782
+        },
+        {
+          "id": "q028",
+          "query": "独立命名卷如何避免实例冲突",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 5,
+          "reciprocal_rank": 0.2,
+          "latency_ms": 188.22
+        },
+        {
+          "id": "q029",
+          "query": "NEO4J_AUTH 如何配置账号密码？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 409.252
+        },
+        {
+          "id": "q030",
+          "query": "为什么图节点要带 namespace？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 191.664
+        },
+        {
+          "id": "q031",
+          "query": "Neo4j 数据卷与日志卷是什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 405.134
+        },
+        {
+          "id": "q032",
+          "query": "图数据库容器的数据隔离方案",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.967
+        },
+        {
+          "id": "q033",
+          "query": "RELATED*1..2 表达什么路径？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.329
+        },
+        {
+          "id": "q034",
+          "query": "为什么 Cypher 查询要限制最大深度？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 200.346
+        },
+        {
+          "id": "q035",
+          "query": "实体别名与一至二跳检索的关系",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.214
+        },
+        {
+          "id": "q036",
+          "query": "如何避免把用户文本拼进图查询",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 397.897
+        },
+        {
+          "id": "q037",
+          "query": "POST /query 的 top_k 范围是多少？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.032
+        },
+        {
+          "id": "q038",
+          "query": "为什么请求体要用 Pydantic 校验？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.96
+        },
+        {
+          "id": "q039",
+          "query": "trace_id 与引用复盘有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 206.631
+        },
+        {
+          "id": "q040",
+          "query": "健康接口应检查哪些真实后端",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 392.875
+        },
+        {
+          "id": "q041",
+          "query": "service_completed_successfully 控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.037
+        },
+        {
+          "id": "q042",
+          "query": "为什么 API 要等待 indexer 成功？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.022
+        },
+        {
+          "id": "q043",
+          "query": "Docker Compose 与 Indexer 的编排关系",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 402.944
+        },
+        {
+          "id": "q044",
+          "query": "容器健康之后还需要哪些业务验收",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 191.121
+        },
+        {
+          "id": "q045",
+          "query": "OWASP 的 Prompt Injection 风险是什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.571
+        },
+        {
+          "id": "q046",
+          "query": "为什么知识库文档仍是不可信输入？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 195.897
+        },
+        {
+          "id": "q047",
+          "query": "引用与间接提示注入有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 404.878
+        },
+        {
+          "id": "q048",
+          "query": "列出降低检索增强生成注入风险的方法",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 395.889
+        },
+        {
+          "id": "q049",
+          "query": "SHA-1 如何用于 chunk_id？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 204.299
+        },
+        {
+          "id": "q050",
+          "query": "为什么文档切分需要重叠窗口？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 395.271
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 407.562
+        },
+        {
+          "id": "q052",
+          "query": "稳定切片标识如何支持重复索引",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.063
+        },
+        {
+          "id": "q053",
+          "query": "Router 如何识别 API 名和错误码？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 404.455
+        },
+        {
+          "id": "q054",
+          "query": "为什么概念问题偏向向量模型？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 200.23
+        },
+        {
+          "id": "q055",
+          "query": "查询路由与 Neo4j 多跳路径的关系",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 401.659
+        },
+        {
+          "id": "q056",
+          "query": "可解释规则路由有哪些优缺点",
+          "expected_route": "hybrid",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.514
+        },
+        {
+          "id": "q057",
+          "query": "trace_id、chunk_id 和 rank 用来做什么？",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 404.031
+        },
+        {
+          "id": "q058",
+          "query": "为什么引用不是响应里的装饰？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.463
+        },
+        {
+          "id": "q059",
+          "query": "Citation 与 Evaluation 的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 414.904
+        },
+        {
+          "id": "q060",
+          "query": "如何区分单机延迟基线和生产 SLA",
+          "expected_route": "keyword",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 181.048
+        }
+      ]
+    },
+    "hybrid": {
+      "metrics": {
+        "query_count": 60,
+        "recall_at_5": 0.95,
+        "mrr": 0.8394,
+        "top1_citation_accuracy": 0.7667,
+        "route_accuracy": null,
+        "mean_latency_ms": 303.301,
+        "p50_latency_ms": 391.692,
+        "p95_latency_ms": 406.31
+      },
+      "failures": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 403.761
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 406.107
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 206.603
+        }
+      ],
+      "cases": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 403.761
+        },
+        {
+          "id": "q002",
+          "query": "为什么检索评测不能只看成功案例？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.555
+        },
+        {
+          "id": "q003",
+          "query": "MRR 和首个相关结果排名有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 202.832
+        },
+        {
+          "id": "q004",
+          "query": "离线检索报告应该保存哪些内容",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 192.55
+        },
+        {
+          "id": "q005",
+          "query": "BM25 的 k1 和 b 分别控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 403.855
+        },
+        {
+          "id": "q006",
+          "query": "为什么关键词检索适合错误码？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.655
+        },
+        {
+          "id": "q007",
+          "query": "BM25 与稠密检索有什么互补关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.489
+        },
+        {
+          "id": "q008",
+          "query": "说明词频饱和与文档长度归一化",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.985
+        },
+        {
+          "id": "q009",
+          "query": "RRF 的 1/(k+rank) 公式是什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 207.857
+        },
+        {
+          "id": "q010",
+          "query": "为什么 RRF 不需要校准不同分数？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 397.152
+        },
+        {
+          "id": "q011",
+          "query": "BM25 和 BGE 通过什么关系合并排名？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 403.061
+        },
+        {
+          "id": "q012",
+          "query": "多路检索排名融合的常用常数",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 397.913
+        },
+        {
+          "id": "q013",
+          "query": "bge-small-zh-v1.5 的向量维度是多少？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 398.407
+        },
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 195.786
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 406.107
+        },
+        {
+          "id": "q016",
+          "query": "中文嵌入模型的参数量、长度和许可证",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 393.73
+        },
+        {
+          "id": "q017",
+          "query": "Milvus collection 的主键字段是什么？",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 406.31
+        },
+        {
+          "id": "q018",
+          "query": "为什么关闭 dynamic field？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 393.58
+        },
+        {
+          "id": "q019",
+          "query": "source 字段和删除文档有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.642
+        },
+        {
+          "id": "q020",
+          "query": "向量集合需要保存哪些标量元数据",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.883
+        },
+        {
+          "id": "q021",
+          "query": "HNSW 的 M=16 与 efConstruction=128 表示什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 206.039
+        },
+        {
+          "id": "q022",
+          "query": "为什么提高 ef 会增加查询延迟？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.865
+        },
+        {
+          "id": "q023",
+          "query": "HNSW 参数和召回延迟有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 408.625
+        },
+        {
+          "id": "q024",
+          "query": "近似最近邻索引如何做参数对比",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 391.692
+        },
+        {
+          "id": "q025",
+          "query": "Milvus standalone 使用哪个端口？",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 207.328
+        },
+        {
+          "id": "q026",
+          "query": "为什么向量数据库需要 etcd 和 MinIO？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 209.111
+        },
+        {
+          "id": "q027",
+          "query": "Milvus、etcd、MinIO 的依赖关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 195.913
+        },
+        {
+          "id": "q028",
+          "query": "独立命名卷如何避免实例冲突",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 188.474
+        },
+        {
+          "id": "q029",
+          "query": "NEO4J_AUTH 如何配置账号密码？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.841
+        },
+        {
+          "id": "q030",
+          "query": "为什么图节点要带 namespace？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 391.866
+        },
+        {
+          "id": "q031",
+          "query": "Neo4j 数据卷与日志卷是什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 416.623
+        },
+        {
+          "id": "q032",
+          "query": "图数据库容器的数据隔离方案",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 195.449
+        },
+        {
+          "id": "q033",
+          "query": "RELATED*1..2 表达什么路径？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 390.414
+        },
+        {
+          "id": "q034",
+          "query": "为什么 Cypher 查询要限制最大深度？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 202.07
+        },
+        {
+          "id": "q035",
+          "query": "实体别名与一至二跳检索的关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 197.392
+        },
+        {
+          "id": "q036",
+          "query": "如何避免把用户文本拼进图查询",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.003
+        },
+        {
+          "id": "q037",
+          "query": "POST /query 的 top_k 范围是多少？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 397.884
+        },
+        {
+          "id": "q038",
+          "query": "为什么请求体要用 Pydantic 校验？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.889
+        },
+        {
+          "id": "q039",
+          "query": "trace_id 与引用复盘有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 209.779
+        },
+        {
+          "id": "q040",
+          "query": "健康接口应检查哪些真实后端",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 188.265
+        },
+        {
+          "id": "q041",
+          "query": "service_completed_successfully 控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.431
+        },
+        {
+          "id": "q042",
+          "query": "为什么 API 要等待 indexer 成功？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.185
+        },
+        {
+          "id": "q043",
+          "query": "Docker Compose 与 Indexer 的编排关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 403.005
+        },
+        {
+          "id": "q044",
+          "query": "容器健康之后还需要哪些业务验收",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.416
+        },
+        {
+          "id": "q045",
+          "query": "OWASP 的 Prompt Injection 风险是什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 408.592
+        },
+        {
+          "id": "q046",
+          "query": "为什么知识库文档仍是不可信输入？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 191.798
+        },
+        {
+          "id": "q047",
+          "query": "引用与间接提示注入有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.828
+        },
+        {
+          "id": "q048",
+          "query": "列出降低检索增强生成注入风险的方法",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 393.71
+        },
+        {
+          "id": "q049",
+          "query": "SHA-1 如何用于 chunk_id？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 203.999
+        },
+        {
+          "id": "q050",
+          "query": "为什么文档切分需要重叠窗口？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 395.676
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 206.603
+        },
+        {
+          "id": "q052",
+          "query": "稳定切片标识如何支持重复索引",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.235
+        },
+        {
+          "id": "q053",
+          "query": "Router 如何识别 API 名和错误码？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 405.568
+        },
+        {
+          "id": "q054",
+          "query": "为什么概念问题偏向向量模型？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.396
+        },
+        {
+          "id": "q055",
+          "query": "查询路由与 Neo4j 多跳路径的关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 201.983
+        },
+        {
+          "id": "q056",
+          "query": "可解释规则路由有哪些优缺点",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 191.879
+        },
+        {
+          "id": "q057",
+          "query": "trace_id、chunk_id 和 rank 用来做什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 405.244
+        },
+        {
+          "id": "q058",
+          "query": "为什么引用不是响应里的装饰？",
+          "expected_route": "vector",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.929
+        },
+        {
+          "id": "q059",
+          "query": "Citation 与 Evaluation 的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 5,
+          "reciprocal_rank": 0.2,
+          "latency_ms": 202.628
+        },
+        {
+          "id": "q060",
+          "query": "如何区分单机延迟基线和生产 SLA",
+          "expected_route": "keyword",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 191.318
+        }
+      ]
+    },
+    "hybrid_graph": {
+      "metrics": {
+        "query_count": 60,
+        "recall_at_5": 1.0,
+        "mrr": 0.8528,
+        "top1_citation_accuracy": 0.75,
+        "route_accuracy": null,
+        "mean_latency_ms": 296.611,
+        "p50_latency_ms": 207.099,
+        "p95_latency_ms": 408.652
+      },
+      "failures": [],
+      "cases": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 405.45
+        },
+        {
+          "id": "q002",
+          "query": "为什么检索评测不能只看成功案例？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.191
+        },
+        {
+          "id": "q003",
+          "query": "MRR 和首个相关结果排名有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 442.111
+        },
+        {
+          "id": "q004",
+          "query": "离线检索报告应该保存哪些内容",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 146.361
+        },
+        {
+          "id": "q005",
+          "query": "BM25 的 k1 和 b 分别控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 410.086
+        },
+        {
+          "id": "q006",
+          "query": "为什么关键词检索适合错误码？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 201.375
+        },
+        {
+          "id": "q007",
+          "query": "BM25 与稠密检索有什么互补关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 197.071
+        },
+        {
+          "id": "q008",
+          "query": "说明词频饱和与文档长度归一化",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 190.853
+        },
+        {
+          "id": "q009",
+          "query": "RRF 的 1/(k+rank) 公式是什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 207.099
+        },
+        {
+          "id": "q010",
+          "query": "为什么 RRF 不需要校准不同分数？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 398.054
+        },
+        {
+          "id": "q011",
+          "query": "BM25 和 BGE 通过什么关系合并排名？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 402.4
+        },
+        {
+          "id": "q012",
+          "query": "多路检索排名融合的常用常数",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 404.702
+        },
+        {
+          "id": "q013",
+          "query": "bge-small-zh-v1.5 的向量维度是多少？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.819
+        },
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 394.789
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 206.908
+        },
+        {
+          "id": "q016",
+          "query": "中文嵌入模型的参数量、长度和许可证",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.215
+        },
+        {
+          "id": "q017",
+          "query": "Milvus collection 的主键字段是什么？",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.327
+        },
+        {
+          "id": "q018",
+          "query": "为什么关闭 dynamic field？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 194.771
+        },
+        {
+          "id": "q019",
+          "query": "source 字段和删除文档有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.26
+        },
+        {
+          "id": "q020",
+          "query": "向量集合需要保存哪些标量元数据",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.546
+        },
+        {
+          "id": "q021",
+          "query": "HNSW 的 M=16 与 efConstruction=128 表示什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 404.883
+        },
+        {
+          "id": "q022",
+          "query": "为什么提高 ef 会增加查询延迟？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 194.551
+        },
+        {
+          "id": "q023",
+          "query": "HNSW 参数和召回延迟有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 408.652
+        },
+        {
+          "id": "q024",
+          "query": "近似最近邻索引如何做参数对比",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 391.875
+        },
+        {
+          "id": "q025",
+          "query": "Milvus standalone 使用哪个端口？",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.092
+        },
+        {
+          "id": "q026",
+          "query": "为什么向量数据库需要 etcd 和 MinIO？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 203.919
+        },
+        {
+          "id": "q027",
+          "query": "Milvus、etcd、MinIO 的依赖关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 198.804
+        },
+        {
+          "id": "q028",
+          "query": "独立命名卷如何避免实例冲突",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 393.116
+        },
+        {
+          "id": "q029",
+          "query": "NEO4J_AUTH 如何配置账号密码？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 404.576
+        },
+        {
+          "id": "q030",
+          "query": "为什么图节点要带 namespace？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 195.303
+        },
+        {
+          "id": "q031",
+          "query": "Neo4j 数据卷与日志卷是什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 204.169
+        },
+        {
+          "id": "q032",
+          "query": "图数据库容器的数据隔离方案",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 202.384
+        },
+        {
+          "id": "q033",
+          "query": "RELATED*1..2 表达什么路径？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.472
+        },
+        {
+          "id": "q034",
+          "query": "为什么 Cypher 查询要限制最大深度？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 400.468
+        },
+        {
+          "id": "q035",
+          "query": "实体别名与一至二跳检索的关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.53
+        },
+        {
+          "id": "q036",
+          "query": "如何避免把用户文本拼进图查询",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.442
+        },
+        {
+          "id": "q037",
+          "query": "POST /query 的 top_k 范围是多少？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.908
+        },
+        {
+          "id": "q038",
+          "query": "为什么请求体要用 Pydantic 校验？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 394.85
+        },
+        {
+          "id": "q039",
+          "query": "trace_id 与引用复盘有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 428.199
+        },
+        {
+          "id": "q040",
+          "query": "健康接口应检查哪些真实后端",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 372.042
+        },
+        {
+          "id": "q041",
+          "query": "service_completed_successfully 控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.301
+        },
+        {
+          "id": "q042",
+          "query": "为什么 API 要等待 indexer 成功？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.651
+        },
+        {
+          "id": "q043",
+          "query": "Docker Compose 与 Indexer 的编排关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.666
+        },
+        {
+          "id": "q044",
+          "query": "容器健康之后还需要哪些业务验收",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.392
+        },
+        {
+          "id": "q045",
+          "query": "OWASP 的 Prompt Injection 风险是什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.929
+        },
+        {
+          "id": "q046",
+          "query": "为什么知识库文档仍是不可信输入？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 395.477
+        },
+        {
+          "id": "q047",
+          "query": "引用与间接提示注入有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 404.337
+        },
+        {
+          "id": "q048",
+          "query": "列出降低检索增强生成注入风险的方法",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 196.304
+        },
+        {
+          "id": "q049",
+          "query": "SHA-1 如何用于 chunk_id？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 204.633
+        },
+        {
+          "id": "q050",
+          "query": "为什么文档切分需要重叠窗口？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.658
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 408.57
+        },
+        {
+          "id": "q052",
+          "query": "稳定切片标识如何支持重复索引",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 192.594
+        },
+        {
+          "id": "q053",
+          "query": "Router 如何识别 API 名和错误码？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 406.508
+        },
+        {
+          "id": "q054",
+          "query": "为什么概念问题偏向向量模型？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 198.825
+        },
+        {
+          "id": "q055",
+          "query": "查询路由与 Neo4j 多跳路径的关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 201.853
+        },
+        {
+          "id": "q056",
+          "query": "可解释规则路由有哪些优缺点",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 392.979
+        },
+        {
+          "id": "q057",
+          "query": "trace_id、chunk_id 和 rank 用来做什么？",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 403.487
+        },
+        {
+          "id": "q058",
+          "query": "为什么引用不是响应里的装饰？",
+          "expected_route": "vector",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.79
+        },
+        {
+          "id": "q059",
+          "query": "Citation 与 Evaluation 的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.177
+        },
+        {
+          "id": "q060",
+          "query": "如何区分单机延迟基线和生产 SLA",
+          "expected_route": "keyword",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 192.886
+        }
+      ]
+    },
+    "routed": {
+      "metrics": {
+        "query_count": 60,
+        "recall_at_5": 0.9667,
+        "mrr": 0.7736,
+        "top1_citation_accuracy": 0.65,
+        "route_accuracy": 1.0,
+        "mean_latency_ms": 276.637,
+        "p50_latency_ms": 205.6,
+        "p95_latency_ms": 407.317
+      },
+      "failures": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 209.072
+        },
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 184.266
+        }
+      ],
+      "cases": [
+        {
+          "id": "q001",
+          "query": "Recall@5 衡量什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 209.072
+        },
+        {
+          "id": "q002",
+          "query": "为什么检索评测不能只看成功案例？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 396.286
+        },
+        {
+          "id": "q003",
+          "query": "MRR 和首个相关结果排名有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.78
+        },
+        {
+          "id": "q004",
+          "query": "离线检索报告应该保存哪些内容",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 195.11
+        },
+        {
+          "id": "q005",
+          "query": "BM25 的 k1 和 b 分别控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.055
+        },
+        {
+          "id": "q006",
+          "query": "为什么关键词检索适合错误码？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 402.245
+        },
+        {
+          "id": "q007",
+          "query": "BM25 与稠密检索有什么互补关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.493
+        },
+        {
+          "id": "q008",
+          "query": "说明词频饱和与文档长度归一化",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 391.024
+        },
+        {
+          "id": "q009",
+          "query": "RRF 的 1/(k+rank) 公式是什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 407.646
+        },
+        {
+          "id": "q010",
+          "query": "为什么 RRF 不需要校准不同分数？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.065
+        },
+        {
+          "id": "q011",
+          "query": "BM25 和 BGE 通过什么关系合并排名？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 202.077
+        },
+        {
+          "id": "q012",
+          "query": "多路检索排名融合的常用常数",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 201.815
+        },
+        {
+          "id": "q013",
+          "query": "bge-small-zh-v1.5 的向量维度是多少？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 406.107
+        },
+        {
+          "id": "q014",
+          "query": "为什么文档编码不添加查询指令？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": null,
+          "reciprocal_rank": 0.0,
+          "latency_ms": 184.266
+        },
+        {
+          "id": "q015",
+          "query": "BGE 与 Milvus 的数据关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 206.003
+        },
+        {
+          "id": "q016",
+          "query": "中文嵌入模型的参数量、长度和许可证",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.085
+        },
+        {
+          "id": "q017",
+          "query": "Milvus collection 的主键字段是什么？",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 407.317
+        },
+        {
+          "id": "q018",
+          "query": "为什么关闭 dynamic field？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 194.889
+        },
+        {
+          "id": "q019",
+          "query": "source 字段和删除文档有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 197.859
+        },
+        {
+          "id": "q020",
+          "query": "向量集合需要保存哪些标量元数据",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 198.859
+        },
+        {
+          "id": "q021",
+          "query": "HNSW 的 M=16 与 efConstruction=128 表示什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.6
+        },
+        {
+          "id": "q022",
+          "query": "为什么提高 ef 会增加查询延迟？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.922
+        },
+        {
+          "id": "q023",
+          "query": "HNSW 参数和召回延迟有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 402.397
+        },
+        {
+          "id": "q024",
+          "query": "近似最近邻索引如何做参数对比",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 394.836
+        },
+        {
+          "id": "q025",
+          "query": "Milvus standalone 使用哪个端口？",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.126
+        },
+        {
+          "id": "q026",
+          "query": "为什么向量数据库需要 etcd 和 MinIO？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 405.89
+        },
+        {
+          "id": "q027",
+          "query": "Milvus、etcd、MinIO 的依赖关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 205.452
+        },
+        {
+          "id": "q028",
+          "query": "独立命名卷如何避免实例冲突",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 182.954
+        },
+        {
+          "id": "q029",
+          "query": "NEO4J_AUTH 如何配置账号密码？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 207.481
+        },
+        {
+          "id": "q030",
+          "query": "为什么图节点要带 namespace？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/06_milvus_hnsw.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 397.967
+        },
+        {
+          "id": "q031",
+          "query": "Neo4j 数据卷与日志卷是什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 410.836
+        },
+        {
+          "id": "q032",
+          "query": "图数据库容器的数据隔离方案",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/08_neo4j_docker.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 194.271
+        },
+        {
+          "id": "q033",
+          "query": "RELATED*1..2 表达什么路径？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 388.884
+        },
+        {
+          "id": "q034",
+          "query": "为什么 Cypher 查询要限制最大深度？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 199.313
+        },
+        {
+          "id": "q035",
+          "query": "实体别名与一至二跳检索的关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.247
+        },
+        {
+          "id": "q036",
+          "query": "如何避免把用户文本拼进图查询",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.235
+        },
+        {
+          "id": "q037",
+          "query": "POST /query 的 top_k 范围是多少？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/07_milvus_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 198.416
+        },
+        {
+          "id": "q038",
+          "query": "为什么请求体要用 Pydantic 校验？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.78
+        },
+        {
+          "id": "q039",
+          "query": "trace_id 与引用复盘有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 2,
+          "reciprocal_rank": 0.5,
+          "latency_ms": 405.593
+        },
+        {
+          "id": "q040",
+          "query": "健康接口应检查哪些真实后端",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 394.414
+        },
+        {
+          "id": "q041",
+          "query": "service_completed_successfully 控制什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 4,
+          "reciprocal_rank": 0.25,
+          "latency_ms": 399.23
+        },
+        {
+          "id": "q042",
+          "query": "为什么 API 要等待 indexer 成功？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 205.778
+        },
+        {
+          "id": "q043",
+          "query": "Docker Compose 与 Indexer 的编排关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/11_docker_compose.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 401.265
+        },
+        {
+          "id": "q044",
+          "query": "容器健康之后还需要哪些业务验收",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.133
+        },
+        {
+          "id": "q045",
+          "query": "OWASP 的 Prompt Injection 风险是什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 404.88
+        },
+        {
+          "id": "q046",
+          "query": "为什么知识库文档仍是不可信输入？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 195.258
+        },
+        {
+          "id": "q047",
+          "query": "引用与间接提示注入有什么关系？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 406.663
+        },
+        {
+          "id": "q048",
+          "query": "列出降低检索增强生成注入风险的方法",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/01_rag_evaluation.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 399.98
+        },
+        {
+          "id": "q049",
+          "query": "SHA-1 如何用于 chunk_id？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/12_prompt_injection.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 400.68
+        },
+        {
+          "id": "q050",
+          "query": "为什么文档切分需要重叠窗口？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 192.346
+        },
+        {
+          "id": "q051",
+          "query": "Chunk 与 Milvus 元数据的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/07_milvus_compose.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 409.137
+        },
+        {
+          "id": "q052",
+          "query": "稳定切片标识如何支持重复索引",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/13_chunking.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 190.066
+        },
+        {
+          "id": "q053",
+          "query": "Router 如何识别 API 名和错误码？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/05_milvus_schema.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 206.439
+        },
+        {
+          "id": "q054",
+          "query": "为什么概念问题偏向向量模型？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/04_bge.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 198.512
+        },
+        {
+          "id": "q055",
+          "query": "查询路由与 Neo4j 多跳路径的关系",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/11_docker_compose.md",
+            "data/public_corpus/09_cypher_paths.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 201.435
+        },
+        {
+          "id": "q056",
+          "query": "可解释规则路由有哪些优缺点",
+          "expected_route": "hybrid",
+          "actual_route": "hybrid",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/02_bm25.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 193.949
+        },
+        {
+          "id": "q057",
+          "query": "trace_id、chunk_id 和 rank 用来做什么？",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/03_rrf.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/10_fastapi.md",
+            "data/public_corpus/03_rrf.md"
+          ],
+          "first_relevant_rank": 3,
+          "reciprocal_rank": 0.3333333333333333,
+          "latency_ms": 205.858
+        },
+        {
+          "id": "q058",
+          "query": "为什么引用不是响应里的装饰？",
+          "expected_route": "vector",
+          "actual_route": "bge",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/05_milvus_schema.md",
+            "data/public_corpus/12_prompt_injection.md",
+            "data/public_corpus/10_fastapi.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 199.277
+        },
+        {
+          "id": "q059",
+          "query": "Citation 与 Evaluation 的关系是什么？",
+          "expected_route": "graph",
+          "actual_route": "hybrid_graph",
+          "sources": [
+            "data/public_corpus/01_rag_evaluation.md",
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/09_cypher_paths.md",
+            "data/public_corpus/15_citations_observability.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 200.61
+        },
+        {
+          "id": "q060",
+          "query": "如何区分单机延迟基线和生产 SLA",
+          "expected_route": "keyword",
+          "actual_route": "bm25",
+          "sources": [
+            "data/public_corpus/15_citations_observability.md",
+            "data/public_corpus/06_milvus_hnsw.md",
+            "data/public_corpus/14_router.md",
+            "data/public_corpus/02_bm25.md",
+            "data/public_corpus/13_chunking.md"
+          ],
+          "first_relevant_rank": 1,
+          "reciprocal_rank": 1.0,
+          "latency_ms": 194.051
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The corpus is curated and small; results do not represent web-scale retrieval.",
+    "Latency is a local sequential CPU measurement, not a concurrency load test.",
+    "Labels were manually authored and should be independently reviewed before publication claims."
+  ]
+}

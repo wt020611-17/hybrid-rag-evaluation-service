@@ -1,120 +1,112 @@
 # Hybrid RAG Evaluation Service
 
-一个“证据优先”的个人 RAG 项目：用独立实现证明文档入库、BM25、向量检索、图路径检索、RRF 融合、引用返回、Query Router、FastAPI 契约和固定评测集，而不是把教程仓库换名后当作原创。
+一个可复现、可评测的中文混合检索 RAG 项目。项目同时保留零外部服务的 v0.1 基线，以及真实 BGE + Milvus + Neo4j 的 v1.0 生产路径；每项简历表述都能对应到代码、测试或逐题评测报告。
 
-## 当前已验证范围（v0.1.0）
+## v1.0 已实现
 
-- 读取 Markdown/TXT，按字符窗口切分并保留来源元数据。
-- 纯 Python BM25 与 TF-IDF 向量检索，支持离线运行。
-- 基于显式实体关系的 1～2 跳图路径检索。
-- Reciprocal Rank Fusion（RRF）融合多路排名。
-- 规则 Query Router，提供 `keyword`、`vector`、`graph`、`hybrid` 路由。
-- 返回答案片段、引用、分数、检索通道和 `trace_id`。
-- 30 条固定查询，复现 Recall@K、MRR、首条引用命中率和路由准确率。
-- FastAPI `/health`、`/query`、`/debug/retrieval` 接口与 Dockerfile。
+- `BAAI/bge-small-zh-v1.5` 本地 CPU 推理，按模型卡使用 CLS pooling 与 L2 归一化，输出 512 维向量。
+- Milvus 2.5 独立 collection：显式 schema、HNSW/COSINE、M=16、efConstruction=128、ef=64。
+- Neo4j 5 独立 namespace：参数化 Cypher、实体别名、一至二跳受限路径。
+- 自实现 BM25、可解释 Query Router 与加权 RRF；图通道权重只作用于显式关系查询。
+- FastAPI `/health`、`/query`、`/debug/retrieval`，返回 trace ID、chunk、来源、通道和排名。
+- 15 篇公开一手资料的中文摘要、17 个 chunk、60 条人工标注查询、五策略消融报告。
+- Docker Compose 隔离 Milvus/etcd/MinIO/Neo4j 的端口和命名卷；索引与 API 支持分步启动。
+- 原 v0.1 的 TF-IDF/内存图实现仍可离线运行，用于解释技术演进和回归测试。
 
-## 诚实边界
+## 实测结果
 
-当前可复现基线使用 TF-IDF 稀疏向量，不把它宣传成 BGE Embedding；图检索使用项目内的显式关系表，不把它宣传成 Neo4j；向量索引在进程内运行，不把它宣传成 Milvus。BGE、Milvus、Neo4j 和外部 LLM 是下一阶段基础设施接入项，只有真实跑通并留下测试/评测证据后才进入简历完成时态。
+2026-08-19，Windows 11、16GB RAM、CPU 推理，固定 60 条查询，`top_k=5`：
 
-学习基线与许可边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+| 策略 | Recall@5 | MRR | Top-1 引用准确率 |
+|---|---:|---:|---:|
+| BM25 | 0.9500 | 0.8292 | 0.7500 |
+| BGE + Milvus | 0.9000 | 0.7575 | 0.6667 |
+| BM25 + BGE + RRF | 0.9500 | 0.8394 | 0.7667 |
+| BM25 + BGE + Neo4j + 加权 RRF | **1.0000** | **0.8528** | 0.7500 |
+| Query Router | 0.9667 | 0.7736 | 0.6500 |
+
+Router 标注准确率为 1.0000。完整逐题结果、失败样本、延迟和限制见 [`reports/ablation.json`](reports/ablation.json)。这些数字只代表小规模人工整理语料，不代表通用中文检索基准；本机顺序延迟也不是生产 SLA。
 
 ## 架构
 
 ```text
-Markdown/TXT -> Document -> Chunk
-                          |-> BM25 ---------|
-                          |-> TF-IDF Vector-|-> RRF -> Citations -> Answer
-relations.json ---------->|-> Graph Path --|
-Query --------------------> Router ---------^
+public Markdown -> stable chunks -> BM25 -------------------|
+                              -> BGE -> Milvus HNSW --------|-> weighted RRF -> citations
+explicit relations -----------------> Neo4j 1..2 hop -------|
+query -> explainable router --------------------------------^
+                                                   -> FastAPI / optional LLM
 ```
+
+详细数据流和证据边界见 [`docs/architecture.md`](docs/architecture.md)。
 
 ## 快速开始
 
-### 仅运行离线核心与评测（无第三方依赖）
-
-```powershell
-$env:PYTHONPATH="src"
-python -m hybrid_rag.cli query "为什么不同检索器的原始分数不能直接相加？"
-python -m hybrid_rag.cli eval --output reports/baseline.json
-python -m unittest discover -s tests -v
-```
-
-### 启动 API
+### 离线基线
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -e ".[dev]"
+hybrid-rag eval --output reports/baseline.json
+pytest
+```
+
+### 生产检索（推荐低内存分步运行）
+
+```powershell
+Copy-Item .env.example .env
+# 修改 .env 中的 NEO4J_PASSWORD 和 BGE_MODEL_PATH
+python scripts/download_model.py --output models/bge-small-zh-v1.5
+python -m pip install -e ".[dev,production]"
+
+docker compose up -d etcd minio milvus neo4j
+hybrid-rag sync-production
+hybrid-rag eval-production
+
+$env:RAG_MODE="production"
 uvicorn hybrid_rag.api:app --host 0.0.0.0 --port 8000
 ```
 
-验证：
+16GB 机器建议索引结束后再启动 API，不要同时运行 Docker build、indexer 和 API 模型。容器化 API 可在本地模型已下载后构建：
 
 ```powershell
-Invoke-RestMethod http://localhost:8000/health
-Invoke-RestMethod -Method Post http://localhost:8000/query `
-  -ContentType 'application/json' `
-  -Body '{"query":"RRF 如何融合排名？","top_k":5,"use_llm":false}'
+docker compose build api
+docker compose --profile app up -d --no-deps api
 ```
 
-### Docker
+## API 示例
 
 ```powershell
-docker build -t hybrid-rag-evaluation-service:0.1.0 .
-docker run --rm -p 8000:8000 hybrid-rag-evaluation-service:0.1.0
+Invoke-RestMethod http://127.0.0.1:8000/health
+$body = @{
+  query = "BGE 与 Milvus、Neo4j 和 RRF 的多跳关系是什么？"
+  top_k = 5
+  strategy = "hybrid_graph"
+  use_llm = $false
+} | ConvertTo-Json
+Invoke-RestMethod -Method Post http://127.0.0.1:8000/query `
+  -ContentType "application/json; charset=utf-8" -Body $body
 ```
+
+生产策略为 `bm25`、`bge`、`hybrid`、`hybrid_graph`、`routed`。外部 LLM 未配置时仍返回可引用的抽取式答案，不伪造生成能力。
+
+## 验证证据
+
+- `16 passed, 2 skipped`：默认单元/API 测试；两项真实后端测试需显式开启。
+- `RUN_PRODUCTION_INTEGRATION=1 pytest tests/test_production_integration.py`：2 项 Milvus/Neo4j 集成测试通过。
+- 真实索引：15 documents / 17 chunks / 17 Milvus rows / 17 Neo4j nodes / 24 relationships。
+- Docker 镜像成功导出，大小约 565MB；低内存机器采用分步启动。
 
 ## 目录
 
 ```text
-src/hybrid_rag/    核心实现与 API
-data/corpus/       自编写的合成演示知识库
-data/graph/        显式实体关系
-data/eval/         30 条固定评测查询
-scripts/           一键评测脚本
-tests/             单元与端到端测试
-reports/           可复现结果
-docs/              架构、验收和简历边界
+src/hybrid_rag/       基线与生产检索、API、评测
+data/public_corpus/   公开一手资料的中文摘要
+data/graph/           Neo4j 实体关系与别名
+data/eval/            60 条生产评测 + 30 条基线评测
+reports/              可复现逐题报告
+tests/                单元、API、真实后端集成测试
+docs/                 架构、简历边界、验收标准
 ```
 
-## 评测口径
-
-- `Recall@K`：前 K 个结果是否命中任一标注来源。
-- `MRR`：第一个命中来源的排名倒数。
-- `top1_citation_accuracy`：首条引用是否来自标注来源。
-- `route_accuracy`：规则 Router 是否命中标注路由。
-
-演示语料和查询是合成数据，只用于验证工程链路，不代表通用中文 RAG 的行业基准。所有结果必须通过命令重新生成，README 不手写“提升 xx%”。
-
-2026-08-19 在 Windows / Python 3.9.7 上复现的 v0.1.0 基线：15 项测试全部通过；30 条查询的 Recall@5 为 1.0000、MRR 为 0.9111、首条引用命中率为 0.8333、路由准确率为 1.0000。逐条结果和限制见 `reports/baseline.json`。这些数字只描述仓库内的合成回归集。
-
-## API 响应示例
-
-```json
-{
-  "status": "ok",
-  "trace_id": "f54f...",
-  "route": "keyword",
-  "answer": "RRF 只使用各检索器中的名次...",
-  "citations": [
-    {
-      "source": "data/corpus/05_rrf_fusion.md",
-      "chunk_id": "...",
-      "score": 0.0325,
-      "channel": "rrf"
-    }
-  ]
-}
-```
-
-## 下一阶段
-
-1. 用 `BAAI/bge-small-zh-v1.5` 替换 TF-IDF 基线并保存同一评测集对比。
-2. 接入 Milvus，补 collection schema、索引参数、空结果和连接失败测试。
-3. 接入 Neo4j，补导入脚本、受限跳数 Cypher 和路径爆炸保护。
-4. 将规则 Router 与可评测的分类 Router 对比。
-5. 接入 OpenAI-compatible LLM，保留无 LLM 时的引用降级。
-
-完整前置条件和发布流程见 [PRECONDITIONS.md](PRECONDITIONS.md)。
-
+第三方来源与许可证边界见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。

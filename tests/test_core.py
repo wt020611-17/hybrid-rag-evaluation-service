@@ -64,6 +64,14 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual({hit.chunk_id for hit in fused}, {"a", "b"})
         self.assertEqual(fused[0].score, fused[1].score)
 
+    def test_rrf_accepts_explicit_channel_weights(self):
+        lexical = SearchHit("a", "a.md", "a", 1, "bm25", rank=1)
+        graph = SearchHit("b", "b.md", "b", 1, "neo4j", rank=1)
+        fused = reciprocal_rank_fusion(
+            [[lexical], [graph]], top_k=2, weights=[1.0, 2.0]
+        )
+        self.assertEqual(fused[0].chunk_id, "b")
+
 
 class GraphTests(unittest.TestCase):
     def test_two_hop_path_is_returned(self):

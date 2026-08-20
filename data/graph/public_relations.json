@@ -1,0 +1,40 @@
+{
+  "aliases": {
+    "BM25": ["稀疏检索", "关键词检索"],
+    "BGE": ["bge-small-zh-v1.5", "稠密检索", "向量模型"],
+    "Milvus": ["向量数据库"],
+    "Neo4j": ["图数据库"],
+    "RRF": ["Reciprocal Rank Fusion", "排名融合"],
+    "FastAPI": ["API 服务"],
+    "Indexer": ["索引任务"],
+    "Router": ["查询路由"],
+    "Citation": ["引用", "证据"],
+    "Evaluation": ["评测", "Recall@5", "MRR"]
+  },
+  "edges": [
+    {"source":"Router","relation":"选择","target":"BM25","source_document":"data/public_corpus/14_router.md"},
+    {"source":"Router","relation":"选择","target":"BGE","source_document":"data/public_corpus/14_router.md"},
+    {"source":"Router","relation":"选择","target":"Neo4j","source_document":"data/public_corpus/14_router.md"},
+    {"source":"BM25","relation":"输入排名到","target":"RRF","source_document":"data/public_corpus/03_rrf.md"},
+    {"source":"BGE","relation":"输入排名到","target":"RRF","source_document":"data/public_corpus/03_rrf.md"},
+    {"source":"Neo4j","relation":"输入路径到","target":"RRF","source_document":"data/public_corpus/09_cypher_paths.md"},
+    {"source":"BGE","relation":"生成向量写入","target":"Milvus","source_document":"data/public_corpus/04_bge.md"},
+    {"source":"Milvus","relation":"使用索引","target":"HNSW","source_document":"data/public_corpus/06_milvus_hnsw.md"},
+    {"source":"Milvus","relation":"依赖","target":"etcd","source_document":"data/public_corpus/07_milvus_compose.md"},
+    {"source":"Milvus","relation":"依赖","target":"MinIO","source_document":"data/public_corpus/07_milvus_compose.md"},
+    {"source":"Indexer","relation":"写入","target":"Milvus","source_document":"data/public_corpus/11_docker_compose.md"},
+    {"source":"Indexer","relation":"写入","target":"Neo4j","source_document":"data/public_corpus/11_docker_compose.md"},
+    {"source":"FastAPI","relation":"查询","target":"Milvus","source_document":"data/public_corpus/10_fastapi.md"},
+    {"source":"FastAPI","relation":"查询","target":"Neo4j","source_document":"data/public_corpus/10_fastapi.md"},
+    {"source":"RRF","relation":"输出","target":"Citation","source_document":"data/public_corpus/15_citations_observability.md"},
+    {"source":"Citation","relation":"接受","target":"Evaluation","source_document":"data/public_corpus/01_rag_evaluation.md"},
+    {"source":"Evaluation","relation":"比较","target":"BM25","source_document":"data/public_corpus/01_rag_evaluation.md"},
+    {"source":"Evaluation","relation":"比较","target":"BGE","source_document":"data/public_corpus/01_rag_evaluation.md"},
+    {"source":"Evaluation","relation":"比较","target":"RRF","source_document":"data/public_corpus/01_rag_evaluation.md"},
+    {"source":"Docker Compose","relation":"编排","target":"Indexer","source_document":"data/public_corpus/11_docker_compose.md"},
+    {"source":"Docker Compose","relation":"编排","target":"FastAPI","source_document":"data/public_corpus/11_docker_compose.md"},
+    {"source":"Chunk","relation":"保存到","target":"Milvus","source_document":"data/public_corpus/13_chunking.md"},
+    {"source":"Prompt Injection","relation":"威胁","target":"RAG","source_document":"data/public_corpus/12_prompt_injection.md"},
+    {"source":"RAG","relation":"返回","target":"Citation","source_document":"data/public_corpus/15_citations_observability.md"}
+  ]
+}
